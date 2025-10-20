@@ -1,5 +1,5 @@
 from secrets import choice
-
+import string
 
 # Generate a secure password based on user-defined criteria
 def choices(alphabet: str, length: int) -> str:
@@ -8,11 +8,11 @@ def choices(alphabet: str, length: int) -> str:
 
 # Generate a secure password based on user-defined criteria with unique characters
 def sample(alphabet: str, length: int) -> str:
-    string = ""
+    line = ""
     for _ in range(length):
-        string += choice(alphabet)
-        alphabet = alphabet.replace(string[-1], "", 1)
-    return string
+        line += choice(alphabet)
+        alphabet = alphabet.replace(line[-1], "", 1)
+    return line
 
 
 # Ask user for password criteria
@@ -42,7 +42,7 @@ def main() -> None:
         """)
     # Default settings
     lenght = 10
-    alphabet = "0123456789" + "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "!#$%&*+-=?@^_"
+    alphabet = string.digits + string.ascii_lowercase + string.ascii_uppercase + string.punctuation
     uniq = 0
 
     while True:
@@ -76,10 +76,10 @@ def settings() -> tuple[int, str, int]:
             print("Incorrect input, please enter a positive integer.")
     
     while True:
-        alphabet = "0123456789" * ask_password_criteria("Whether to include numbers 0123456789 YES(1)/NO(0): ") + \
-        "abcdefghijklmnopqrstuvwxyz" * ask_password_criteria("Whether to include lowercase letters abcdefghijklmnopqrstuvwxyz YES(1)/NO(0): ") + \
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ" * ask_password_criteria("Whether to include uppercase letters ABCDEFGHIJKLMNOPQRSTUVWXYZ YES(1)/NO(0): ") + \
-        "!#$%&*+-=?@^_" * ask_password_criteria("Whether to include punctuation !#$%&*+-=?@^_ YES(1)/NO(0): ")
+        alphabet = string.digits * ask_password_criteria("Whether to include digits YES(1)/NO(0): ") + \
+        string.ascii_lowercase * ask_password_criteria("Whether to include lowercase letters YES(1)/NO(0): ") + \
+        string.ascii_uppercase * ask_password_criteria("Whether to include uppercase letters YES(1)/NO(0): ") + \
+        string.punctuation * ask_password_criteria("Whether to include punctuation YES(1)/NO(0): ")
         uniq = ask_password_criteria('Do you want the characters in your password to be unique? YES(1)/NO(0)')
         
         if alphabet == '':
