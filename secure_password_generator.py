@@ -80,7 +80,7 @@ def settings() -> tuple[int, str, int]:
         string.ascii_lowercase * ask_password_criteria("Whether to include lowercase letters YES(1)/NO(0): ") + \
         string.ascii_uppercase * ask_password_criteria("Whether to include uppercase letters YES(1)/NO(0): ") + \
         string.punctuation * ask_password_criteria("Whether to include punctuation YES(1)/NO(0): ")
-        uniq = ask_password_criteria('Do you want the characters in your password to be unique? YES(1)/NO(0)')
+        uniq = ask_password_criteria('Do you want the characters in your password to be unique? YES(1)/NO(0): ')
         
         if alphabet == '':
             print("Incorrect input, at least one character type must be selected. Please adjust your settings.")
